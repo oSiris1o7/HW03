@@ -34,34 +34,46 @@ public:
     {
         data = new T[currentCapacity];
     }
-    
+
+
     SimpleVector(const int& aa) : data(nullptr), currentSize(0), currentCapacity(aa)
     {
         data = new T[currentCapacity];
     }
-    
+
+
+    SimpleVector(const SimpleVector& other) : currentSize(other.currentSize), currentCapacity(other.currentCapacity)
+    {
+        data = new T[currentCapacity];
+        for (int i = 0; i < currentSize; i++)
+        {
+            data[i] = other.data[i];
+        }
+    }
+
+
     ~SimpleVector()
     {
-		delete[] data;
-		data = nullptr;
+        delete[] data;
+        data = nullptr;
     }
 
     void push_back(const T& newA)
     {
         if (currentCapacity <= currentSize)
         {
-			currentCapacity += 5;
+            currentCapacity += 5;
 
             T* newdata = new T[currentCapacity];
             for (int i = 0; i < currentSize; i++)
             {
-				newdata[i] = data[i];
+                newdata[i] = data[i];
             }
-			delete[] data;
-			data = newdata;
+            delete[] data;
+            data = newdata;
         }
 
-		data[currentSize] = newA;
+        data[currentSize] = newA;
         currentSize++;
     }
     void pop_back()
@@ -70,33 +82,33 @@ public:
         {
             return;
         }
-        
-		currentSize--;
+
+        currentSize--;
     }
     int size() const
     {
         return currentSize;
-	}
+    }
     int capacity() const
     {
         return currentCapacity;
-	}
+    }
     void resize(int abc)
     {
         if (currentCapacity < abc)
-        {   
-			T* newData = new T[abc];
+        {
+            T* newData = new T[abc];
 
             for (int i = 0; i < currentCapacity; i++)
             {
-				newData[i] = data[i];
+                newData[i] = data[i];
             }
 
-			delete[] data;
+            delete[] data;
 
-			data = newData;
+            data = newData;
 
-			currentCapacity = abc;
+            currentCapacity = abc;
         }
     }
     void sortData()
@@ -108,7 +120,16 @@ public:
 
 int main()
 {
-	return 0;
+    SimpleVector<int> aaa;
+
+
+    SimpleVector<int> aaa2(5);
+
+
+    SimpleVector<int> aaa3 = aaa;
+
+
+    return 0;
 }
 
 
